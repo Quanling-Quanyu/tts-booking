@@ -215,3 +215,126 @@
 
 **最後更新：2025-11-24**  
 **版本：v1.0 - 初始規劃**
+
+
+---
+
+2025/11/25由perplexity MAX LABS提供
+
+##專案架構圖
+
+┌─────────────────┐
+│   前台用戶端     │ (React - 瀏覽器)
+│  - 註冊/登入     │
+│  - 瀏覽服務      │
+│  - 預約/付款     │
+└────────┬────────┘
+         │
+         ↓ HTTPS
+┌─────────────────┐
+│   後端API伺服器  │ (Node.js + Express)
+│  - 用戶管理      │
+│  - 預約邏輯      │
+│  - 金流處理      │
+└────────┬────────┘
+         │
+    ┌────┴────┐
+    ↓         ↓
+┌────────┐ ┌─────────┐
+│ 資料庫 │ │ Azure   │
+│ MySQL  │ │ Storage │
+└────────┘ └─────────┘
+
+
+##技術選擇理由
+|技術|為什麼選擇|新手友善度|
+|------|------|------|
+|Node.js|JavaScript語法,前後端共用,易學|	⭐⭐⭐⭐⭐|
+|Express|簡單的路由系統,中文資源多|⭐⭐⭐⭐⭐|
+|React|組件化開發,容易維護|⭐⭐⭐⭐|
+|MySQL|關聯式資料庫,結構清晰|⭐⭐⭐⭐|
+|Azure|微軟平台,中文文檔完整|⭐⭐⭐⭐|
+
+##環境準備
+###第一步：安裝必要工具
+
+# 1. 安裝 Node.js (LTS版本 - 建議v20.x)
+# 前往 https://nodejs.org/zh-tw/ 下載並安裝
+
+# 2. 驗證安裝
+node --version  # 應該顯示 v20.x.x
+npm --version   # 應該顯示 10.x.x
+
+# 3. 安裝 Git (版本控制)
+# 前往 https://git-scm.com/downloads 下載並安裝
+
+# 4. 安裝 Visual Studio Code (程式編輯器)
+# 前往 https://code.visualstudio.com/ 下載並安裝
+
+###第二步：建立專案結構
+
+# 在終端機執行以下指令
+
+# 1. 創建專案資料夾
+mkdir tts-booking-platform
+cd tts-booking-platform
+
+# 2. 初始化 Git 版本控制
+git init
+
+# 3. 創建前後端資料夾
+mkdir backend frontend
+
+# 4. 初始化後端專案
+cd backend
+npm init -y
+
+# 5. 安裝後端必要套件
+npm install express mysql2 bcryptjs jsonwebtoken cors dotenv
+npm install --save-dev nodemon
+
+# 6. 返回根目錄,初始化前端專案
+cd ..
+npx create-react-app frontend
+
+# 7. 創建資料夾結構
+cd backend
+mkdir src
+cd src
+mkdir controllers models routes middleware utils config
+cd ../..
+
+###專案資料夾結構
+tts-booking-platform/
+├── backend/                 # 後端程式碼
+│   ├── src/
+│   │   ├── controllers/    # 處理業務邏輯
+│   │   ├── models/         # 資料庫模型
+│   │   ├── routes/         # API路由
+│   │   ├── middleware/     # 中間件(驗證等)
+│   │   ├── utils/          # 工具函數
+│   │   └── config/         # 設定檔
+│   ├── tests/              # 測試檔案
+│   ├── .env                # 環境變數(機密資訊)
+│   ├── .gitignore          # Git忽略檔案
+│   ├── package.json        # 專案設定
+│   └── server.js           # 主程式進入點
+│
+├── frontend/               # 前端程式碼
+│   ├── public/             # 靜態檔案
+│   ├── src/
+│   │   ├── components/     # React組件
+│   │   ├── pages/          # 頁面組件
+│   │   ├── services/       # API呼叫
+│   │   ├── utils/          # 工具函數
+│   │   └── App.js          # 主應用組件
+│   ├── package.json
+│   └── README.md
+│
+├── docs/                   # 文件資料夾
+│   ├── API.md             # API文件
+│   └── DEPLOY.md          # 部署指南
+│
+└── README.md              # 專案說明
+
+
