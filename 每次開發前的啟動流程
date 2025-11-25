@@ -1,0 +1,247 @@
+# 📋 TTS-Booking 專案操作手冊（命令提示字元版）
+
+# 🎯 每次開發前的啟動流程
+
+## 1️⃣ 啟動MySQL資料庫服務
+bash
+### 方法一：用 Windows 服務管理
+### 按 Win+R，輸入 services.msc，找到 MySQL80，右鍵啟動
+
+### 方法二：命令列啟動（管理員模式）
+net start MySQL80
+
+## 2️⃣ 啟動後端伺服器（Node.js API）
+開啟第一個命令提示字元視窗：
+
+bash
+### 進入後端資料夾
+cd C:\Users\User\tts-booking-main\backend
+
+### 啟動後端伺服器
+node server.js
+✅ 成功訊息：
+
+text
+伺服器運行在 http://localhost:5000
+資料庫連線成功
+⚠️ 這個視窗要一直保持開啟，不要關閉！
+
+## 3️⃣ 啟動前端開發伺服器（React）
+開啟第二個命令提示字元視窗：
+
+bash
+### 進入前端資料夾
+cd C:\Users\User\tts-booking-main\frontend
+
+### 啟動前端伺服器
+npm start
+✅ 成功訊息：
+
+text
+Compiled successfully!
+瀏覽器會自動開啟 http://localhost:3000
+⚠️ 這個視窗也要一直保持開啟！
+
+------
+
+# 🔧 常用開發指令
+## 後端相關（在 backend 資料夾）
+bash
+### 進入後端目錄
+cd C:\Users\User\tts-booking-main\backend
+
+### 安裝依賴（第一次或更新時）
+npm install
+
+### 啟動伺服器
+node server.js
+
+### 測試註冊API
+curl -X POST http://localhost:5000/api/auth/register -H "Content-Type: application/json" -d "{\"email\":\"test@example.com\",\"password\":\"test123\",\"full_name\":\"測試用戶\",\"phone\":\"0912345678\"}"
+
+### 測試登入API
+curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"test@example.com\",\"password\":\"test123\"}"
+
+### 取得所有服務
+curl http://localhost:5000/api/services
+
+### 新增服務（需替換consultant_id）
+curl -X POST http://localhost:5000/api/services -H "Content-Type: application/json" -d "{\"consultant_id\":1,\"title\":\"塔羅占卜\",\"description\":\"專業服務\",\"duration\":60,\"price\":1500,\"category\":\"占卜\"}"
+
+##前端相關（在 frontend 資料夾）
+bash
+### 進入前端目錄
+cd C:\Users\User\tts-booking-main\frontend
+
+### 安裝依賴（第一次或更新時）
+npm install
+
+### 啟動開發伺服器
+npm start
+
+### 清除快取（遇到奇怪錯誤時）
+npm cache clean --force
+rd /s /q node_modules
+del package-lock.json
+npm install
+
+# 🗄️ MySQL 資料庫操作
+## 方法一：MySQL Workbench（圖形化介面）
+開啟 MySQL Workbench
+
+連線到 Local instance MySQL80
+
+選擇資料庫 tts_booking
+
+執行 SQL 指令
+
+## 方法二：命令列操作
+bash
+### 登入MySQL
+mysql -u root -p
+### 輸入密碼後按Enter
+
+### 選擇資料庫
+USE tts_booking;
+
+### 查看所有資料表
+SHOW TABLES;
+
+### 查看users表內容
+SELECT * FROM users;
+
+### 查看services表內容
+SELECT * FROM services;
+
+### 查看bookings表內容
+SELECT * FROM bookings;
+
+### 匯出資料庫
+mysqldump -u root -p tts_booking > backup.sql
+
+### 匯入資料庫（新電腦）
+mysql -u root -p tts_booking < backup.sql
+
+### 離開MySQL
+EXIT;
+
+# 📤 GitHub 操作
+bash
+## 進入專案根目錄
+cd C:\Users\User\tts-booking-main
+
+## 查看目前狀態
+git status
+
+## 加入所有變更檔案
+git add .
+
+## 提交變更（附上說明）
+git commit -m "完成階段二服務API與前端頁面"
+
+## 推送到GitHub
+git push origin main
+
+## 從GitHub拉取最新版本（換電腦時）
+git pull origin main
+
+# 🛑 關閉開發環境
+正常關閉流程
+bash
+## 1. 停止前端伺服器
+## 在前端命令視窗按 Ctrl+C，再按 Y 確認
+
+## 2. 停止後端伺服器
+## 在後端命令視窗按 Ctrl+C
+
+## 3. 停止MySQL（可選，建議保持運行）
+net stop MySQL80
+
+# 🔄 換電腦工作流程
+在新電腦上第一次設定
+bash
+## 1. 安裝 Node.js、MySQL、Git
+
+## 2. Clone專案
+git clone https://github.com/你的帳號/tts-booking.git
+cd tts-booking
+
+## 3. 安裝後端依賴
+cd backend
+npm install
+
+## 4. 安裝前端依賴
+cd ../frontend
+npm install
+
+## 5. 匯入資料庫
+mysql -u root -p tts_booking < backup.sql
+
+## 6. 修改 backend/.env 設定（密碼、連線資訊）
+
+## 7. 啟動開發環境（參照上方啟動流程）
+日常同步
+bash
+## 在新電腦拉取最新代碼
+cd C:\Users\User\tts-booking-main
+git pull origin main
+
+## 重新安裝依賴（如果package.json有更新）
+cd backend
+npm install
+
+cd ../frontend
+npm install
+
+## 啟動開發環境
+
+# 🆘 常見錯誤排除
+錯誤：npm 不是內部或外部命令
+解決方式：
+
+重新安裝 Node.js
+
+重開命令提示字元
+
+錯誤：MySQL 連線失敗
+解決方式：
+
+bash
+## 檢查MySQL是否啟動
+net start MySQL80
+
+## 檢查 backend/.env 設定
+## DB_HOST=localhost
+## DB_USER=root
+## DB_PASSWORD=你的密碼
+## DB_NAME=tts_booking
+錯誤：port 5000 或 3000 already in use
+解決方式：
+
+bash
+## 找出佔用的程式
+netstat -ano | findstr :5000
+
+## 強制關閉（替換最後的PID）
+taskkill /PID 12345 /F
+錯誤：前端無法連接後端API
+檢查清單：
+
+ 後端伺服器是否正在運行（http://localhost:5000）
+
+ 前端API位址是否正確
+
+ 瀏覽器F12查看Network是否有CORS錯誤
+
+# 📝 每日開發檢查清單
+text
+## 開始工作前：
+□ MySQL 服務啟動
+□ 開啟後端命令視窗 → node server.js
+□ 開啟前端命令視窗 → npm start
+□ 瀏覽器開啟 http://localhost:3000
+
+## 結束工作後：
+□ Ctrl+C 停止前端
+□ Ctrl+C 停止後端
+□ git add . && git commit -m "說明" && git push
