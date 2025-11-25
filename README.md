@@ -102,8 +102,8 @@
 | API-05 | `/api/availability` | 查詢可預約時段 | GET | 🔴 High | ⚪ TODO |
 | API-06 | `/api/bookings` | 建立預約 | POST | 🔴 High | ⚪ TODO |
 | API-07 | `/api/bookings/:id` | 查詢/更新/取消預約 | GET/PUT/DELETE | 🔴 High | ⚪ TODO |
-| API-08 | `/api/auth/register` | 會員註冊 | POST | 🔴 High | ⚪ TODO |
-| API-09 | `/api/auth/login` | 會員登入 | POST | 🔴 High | ⚪ TODO |
+| API-08 | `/api/auth/register` | 會員註冊 | POST | 🔴 High | ✅2025/11/25測試通過 |
+| API-09 | `/api/auth/login` | 會員登入 | POST | 🔴 High | ✅2025/11/25測試通過 |
 | API-10 | `/api/auth/social` | 社群登入（LINE/FB） | POST | 🟡 Medium | ⚪ TODO |
 | API-11 | **`/api/payments/checkout`** | **產生師資綠界金流表單** | POST | 🔴 High | ⚪ TODO |
 | API-12 | **`/api/payments/callback`** | **接收綠界 Webhook 通知** | POST | 🔴 High | ⚪ TODO |
@@ -117,6 +117,9 @@
 | API-20 | **`/api/analytics/provider`** | **師資數據分析（預約/收入）** | GET | 🟡 Medium | ⚪ TODO |
 | API-21 | **`/api/analytics/admin`** | **管理員平台數據分析** | GET | 🟡 Medium | ⚪ TODO |
 
+// 2025/11/25 19:35更新：
+正在準備/進行（基礎架構已Ready）：services、consultants、bookings（資料表已建立，API只需串接即可）
+
 ---
 
 ## 💾 資料庫設計
@@ -124,16 +127,16 @@
 ### 核心資料表
 | 編號 | 資料表名稱 | 說明 | 優先級 | 狀態 |
 |------|------------|------|--------|------|
-| DB-01 | users | 會員資料（預約者+提供者） | 🔴 High | ⚪ TODO |
-| DB-02 | providers | 服務提供者資料 | 🔴 High | ⚪ TODO |
-| DB-03 | services | 服務項目 | 🔴 High | ⚪ TODO |
-| DB-04 | bookings | 預約紀錄 | 🔴 High | ⚪ TODO |
+| DB-01 | users | 會員資料（預約者+提供者） | 🔴 High | ✅完成 |
+| DB-02 | providers | 服務提供者資料 | 🔴 High | ✅完成 |
+| DB-03 | services | 服務項目 | 🔴 High | ✅完成 |
+| DB-04 | bookings | 預約紀錄 | 🔴 High | ✅完成 |
 | DB-05 | availability | 專家可預約時段 | 🔴 High | ⚪ TODO |
-| DB-06 | **payments** | **付款紀錄（Webhook 回傳）** | 🔴 High | ⚪ TODO |
+| DB-06 | **payments** | **付款紀錄（Webhook 回傳）** | 🔴 High | ✅完成 |
 | DB-07 | custom_forms | 自訂表單結構 | 🟡 Medium | ⚪ TODO |
 | DB-08 | form_responses | 表單回覆內容 | 🟡 Medium | ⚪ TODO |
-| DB-09 | notifications | 通知紀錄 | 🟢 Low | ⚪ TODO |
-| DB-10 | **reviews** | **評價系統** | 🟡 Medium | ⚪ TODO |
+| DB-09 | notifications | 通知紀錄 | 🟢 Low | ✅完成 |
+| DB-10 | **reviews** | **評價系統** | 🟡 Medium | ✅完成 |
 | DB-11 | **badges** | **認證徽章資料** | 🟡 Medium | ⚪ TODO |
 | DB-12 | **provider_payment_info** | **師資綠界金流設定** | 🔴 High | ⚪ TODO |
 
