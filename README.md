@@ -221,7 +221,7 @@
 
 2025/11/25由perplexity MAX LABS提供
 
-##專案架構圖
+## 專案架構圖
 
 ┌─────────────────┐
 │   前台用戶端     │ (React - 瀏覽器)
@@ -246,7 +246,7 @@
 └────────┘ └─────────┘
 
 
-##技術選擇理由
+## 技術選擇理由
 |技術|為什麼選擇|新手友善度|
 |------|------|------|
 |Node.js|JavaScript語法,前後端共用,易學|	⭐⭐⭐⭐⭐|
@@ -255,41 +255,41 @@
 |MySQL|關聯式資料庫,結構清晰|⭐⭐⭐⭐|
 |Azure|微軟平台,中文文檔完整|⭐⭐⭐⭐|
 
-##環境準備
-###第一步：安裝必要工具
+## 環境準備
+### 第一步：安裝必要工具
 
-####1. 安裝 Node.js (LTS版本 - 建議v20.x)
-#####前往 https://nodejs.org/zh-tw/ 下載並安裝
+#### 1. 安裝 Node.js (LTS版本 - 建議v20.x)
+##### 前往 https://nodejs.org/zh-tw/ 下載並安裝
 
-####2. 驗證安裝
+#### 2. 驗證安裝
 node --version  # 應該顯示 v20.x.x
 npm --version   # 應該顯示 10.x.x
 
-####3. 安裝 Git (版本控制)
-#####前往 https://git-scm.com/downloads 下載並安裝
+#### 3. 安裝 Git (版本控制)
+##### 前往 https://git-scm.com/downloads 下載並安裝
 
-####4. 安裝 Visual Studio Code (程式編輯器)
-#####前往 https://code.visualstudio.com/ 下載並安裝
+#### 4. 安裝 Visual Studio Code (程式編輯器)
+##### 前往 https://code.visualstudio.com/ 下載並安裝
 
-###第二步：建立專案結構
+### 第二步：建立專案結構
 
-#####在終端機執行以下指令
+##### 在終端機執行以下指令
 
-####1. 創建專案資料夾
+#### 1. 創建專案資料夾
 mkdir tts-booking-platform
 cd tts-booking-platform
 
-####2. 初始化 Git 版本控制
+#### 2. 初始化 Git 版本控制
 git init
 
-####3. 創建前後端資料夾
+#### 3. 創建前後端資料夾
 mkdir backend frontend
 
-####4. 初始化後端專案
+#### 4. 初始化後端專案
 cd backend
 npm init -y
 
-####5. 安裝後端必要套件
+#### 5. 安裝後端必要套件
 npm install express mysql2 bcryptjs jsonwebtoken cors dotenv
 npm install --save-dev nodemon
 
@@ -304,7 +304,7 @@ cd src
 mkdir controllers models routes middleware utils config
 cd ../..
 
-#####專案資料夾結構
+##### 專案資料夾結構
 tts-booking-platform/
 ├── backend/                 # 後端程式碼
 │   ├── src/
@@ -337,4 +337,48 @@ tts-booking-platform/
 │
 └── README.md              # 專案說明
 
+// 2025/11/25 19:18完成以下本地測試
 
+## 測試階段一成果
+### 測試清單
+#### 後端測試
+bash
+##### 1. 進入後端資料夾
+cd backend
+
+##### 2. 啟動開發伺服器
+npm run dev
+
+##### 3. 測試健康檢查 (另開終端機)
+curl http://localhost:5000/api/health
+
+##### 4. 測試註冊API
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "test123",
+    "full_name": "測試用戶",
+    "phone": "0912345678"
+  }'
+
+##### 5. 測試登入API
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "test123"
+  }'
+#### 前端測試
+
+bash
+##### 1. 進入前端資料夾
+cd frontend
+
+##### 2. 啟動開發伺服器
+npm start
+
+##### 3. 瀏覽器會自動開啟 http://localhost:3000
+##### 4. 測試註冊功能
+##### 5. 測試登入功能
+##### 6. 查看瀏覽器開發者工具的Network標籤確認API呼叫
