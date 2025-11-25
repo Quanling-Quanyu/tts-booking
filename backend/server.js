@@ -45,6 +45,12 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+/**
+ * API路由
+ */
+const authRoutes = require('./src/routes/auth');
+
+app.use('/api/auth', authRoutes);
 
 // 首頁路由
 app.get('/', (req, res) => {
