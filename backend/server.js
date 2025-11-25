@@ -48,9 +48,15 @@ app.get('/api/health', (req, res) => {
 /**
  * API路由
  */
-const authRoutes = require('./src/routes/auth');
 
-app.use('/api/auth', authRoutes);
+// 註冊路由
+const authRoutes = require('./src/routes/auth');
+const servicesRoutes = require('./src/routes/services'); // 新增
+const bookingsRoutes = require('./src/routes/bookings');  // 新增
+
+app.use('/api/services', servicesRoutes);  // 新增
+app.use('/api/bookings', bookingsRoutes);  // 新增
+
 
 // 首頁路由
 app.get('/', (req, res) => {
